@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的Unity开发作品集</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            color: white;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            color: #f8f8f8;
+        }
+        
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .project-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+        }
+        
+        .project-carousel {
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+            border-radius: 12px 12px 0 0;
+        }
+        
+        .carousel-container {
+            height: 100%;
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        
+        .carousel-slide {
+            min-width: 100%;
+            height: 100%;
+        }
+        
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .carousel-controls {
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            z-index: 10;
+        }
+        
+        .carousel-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .carousel-dot.active {
+            background: white;
+        }
+        
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: background 0.3s ease;
+        }
+        
+        .carousel-nav:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+        
+        .carousel-prev {
+            left: 10px;
+        }
+        
+        .carousel-next {
+            right: 10px;
+        }
+        
+        .project-content {
+            padding: 25px;
+        }
+        
+        .project-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        .project-content p {
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .technologies {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .tech-tag {
+            background: #3498db;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+        
+        .project-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #2c3e50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: #3498db;
+        }
+        
+        .btn-primary {
+            background: #e74c3c;
+        }
+        
+        .btn-primary:hover {
+            background: #c0392b;
+        }
+        
+        .contact {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
+        
+        .contact h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .contact-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: #3498db;
+            color: white;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            transition: transform 0.3s ease, background 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .contact-links a:hover {
+            transform: translateY(-5px);
+            background: #2c3e50;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: white;
+            margin-top: 40px;
+        }
+        
+        @media (max-width: 768px) {
+            .projects {
+                grid-template-columns: 1fr;
+            }
+            
+            header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .project-links {
+                flex-direction: column;
+            }
+            
+            .contact-links {
+                flex-wrap: wrap;
+            }
+            
+            .carousel-nav {
+                width: 25px;
+                height: 25px;
+                font-size: 0.8rem;
+            }
+        }
+        /* 视频模态框样式 */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    position: relative;
+    background-color: #1a1a1a;
+    margin: 5% auto;
+    padding: 20px;
+    width: 80%;
+    max-width: 900px;
+    border-radius: 10px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+    animation: modalFade 0.3s;
+}
+
+@keyframes modalFade {
+    from {opacity: 0; transform: translateY(-50px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.close:hover,
+.close:focus {
+    color: white;
+    text-decoration: none;
+}
+
+#projectVideo {
+    width: 100%;
+    border-radius: 5px;
+    outline: none;
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Unity开发作品集</h1>
+            <p>展示我的Unity游戏开发项目，包括仿星露谷物语风格的农场模拟游戏和其他作品</p>
+        </header>
+        
+        <div class="projects">
+            <div class="project-card">
+                <div class="project-carousel">
+                    <div class="carousel-container" id="carousel1">
+                        <div class="carousel-slide">
+                            <img src="./image/农场.png" alt="田园物语游戏截图1">
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="./image/房间.png" alt="田园物语游戏截图2">
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="./image/背包.png" alt="田园物语游戏截图3">
+                        </div>
+                    </div>
+                    <button class="carousel-nav carousel-prev">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="carousel-nav carousel-next">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <div class="carousel-controls">
+                        <div class="carousel-dot active"></div>
+                        <div class="carousel-dot"></div>
+                        <div class="carousel-dot"></div>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3>田园物语 - 仿星露谷物语</h3>
+                    <p>一款融合耕种、采集、社交和探险元素的2D像素风模拟经营游戏。玩家可以管理农场、与NPC互动、探索世界。</p>
+                    
+                    <div class="technologies">
+                        <span class="tech-tag">Unity</span>
+                        <span class="tech-tag">C#</span>
+                        <span class="tech-tag">Tilemap</span>
+                        <span class="tech-tag">UGUI</span>
+                        <span class="tech-tag">JSON</span>
+                    </div>
+                    
+                    <div class="project-links">
+                        <a href=" " class="btn btn-primary">查看演示</a>
+                        <a href="#" class="btn">GitHub源码</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <div class="project-carousel">
+                    <div class="carousel-container" id="carousel2">
+                        <div class="carousel-slide">
+                            <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="冒险者游戏截图1">
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="冒险者游戏截图2">
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="冒险者游戏截图3">
+                        </div>
+                    </div>
+                    <button class="carousel-nav carousel-prev">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="carousel-nav carousel-next">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <div class="carousel-controls">
+                        <div class="carousel-dot active"></div>
+                        <div class="carousel-dot"></div>
+                        <div class="carousel-dot"></div>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3>冒险者传说</h3>
+                    <p>一款2D平台冒险游戏，玩家扮演勇敢的冒险者探索神秘世界，与怪物战斗，解开古老谜题，寻找宝藏。</p>
+                    
+                    <div class="technologies">
+                        <span class="tech-tag">Unity</span>
+                        <span class="tech-tag">C#</span>
+                        <span class="tech-tag">2D物理</span>
+                        <span class="tech-tag">动画系统</span>
+                        <span class="tech-tag">AI行为树</span>
+                    </div>
+                    
+                    <div class="project-links">
+                        <a href="#" class="btn btn-primary">查看演示</a>
+                        <a href="#" class="btn">GitHub源码</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <div class="project-carousel">
+                    <div class="carousel-container" id="carousel3">
+                        <div class="carousel-slide">
+                            <img src="https://images.unsplash.com/photo-1552820728-8b83bb6b773f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="太空射击游戏截图1">
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="太空射击游戏截图2">
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="https://images.unsplash.com/photo-1535223289827-42f1e9919769?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="太空射击游戏截图3">
+                        </div>
+                    </div>
+                    <button class="carousel-nav carousel-prev">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="carousel-nav carousel-next">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <div class="carousel-controls">
+                        <div class="carousel-dot active"></div>
+                        <div class="carousel-dot"></div>
+                        <div class="carousel-dot"></div>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3>太空防卫者</h3>
+                    <p>一款刺激的太空射击游戏，玩家控制宇宙飞船在星际间战斗，升级武器系统，击败外星入侵者。</p>
+                    
+                    <div class="technologies">
+                        <span class="tech-tag">Unity</span>
+                        <span class="tech-tag">C#</span>
+                        <span class="tech-tag">粒子系统</span>
+                        <span class="tech-tag">对象池</span>
+                        <span class="tech-tag">移动端优化</span>
+                    </div>
+                    
+                    <div class="project-links">
+                        <a href="#" class="btn btn-primary">查看演示</a>
+                        <a href="#" class="btn">GitHub源码</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="contact">
+            <h2>联系我</h2>
+            <p>如果您对我的作品感兴趣，或者有任何合作机会，欢迎通过以下方式联系我：</p>
+            
+            <div class="contact-links">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fas fa-envelope"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </div>
+    
+        <!-- 视频模态框 -->
+    <div id="videoModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <video id="projectVideo" controls>
+                <source src="" type="video/mp4">
+                您的浏览器不支持HTML5视频
+            </video>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2023 Unity开发者作品集 - 所有权利保留</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 初始化所有轮播图
+            initCarousels();
+            
+            function initCarousels() {
+                const carousels = document.querySelectorAll('.project-carousel');
+                
+                carousels.forEach(carousel => {
+                    const container = carousel.querySelector('.carousel-container');
+                    const slides = container.querySelectorAll('.carousel-slide');
+                    const dots = carousel.querySelectorAll('.carousel-dot');
+                    const prevBtn = carousel.querySelector('.carousel-prev');
+                    const nextBtn = carousel.querySelector('.carousel-next');
+                    
+                    let currentSlide = 0;
+                    const slideCount = slides.length;
+                    
+                    // 更新轮播图状态
+                    function updateCarousel() {
+                        container.style.transform = `translateX(-${currentSlide * 100}%)`;
+                        
+                        // 更新指示点状态
+                        dots.forEach((dot, index) => {
+                            if (index === currentSlide) {
+                                dot.classList.add('active');
+                            } else {
+                                dot.classList.remove('active');
+                            }
+                        });
+                    }
+                    
+                    // 下一张幻灯片
+                    function nextSlide() {
+                        currentSlide = (currentSlide + 1) % slideCount;
+                        updateCarousel();
+                    }
+                    
+                    // 上一张幻灯片
+                    function prevSlide() {
+                        currentSlide = (currentSlide - 1 + slideCount) % slideCount;
+                        updateCarousel();
+                    }
+                    
+                    // 点击指示点切换幻灯片
+                    dots.forEach((dot, index) => {
+                        dot.addEventListener('click', () => {
+                            currentSlide = index;
+                            updateCarousel();
+                            resetAutoPlay();
+                        });
+                    });
+                    
+                    // 添加按钮事件监听器
+                    nextBtn.addEventListener('click', () => {
+                        nextSlide();
+                        resetAutoPlay();
+                    });
+                    
+                    prevBtn.addEventListener('click', () => {
+                        prevSlide();
+                        resetAutoPlay();
+                    });
+                    
+                    // 自动播放功能
+                    let autoPlayInterval;
+                    
+                    function startAutoPlay() {
+                        autoPlayInterval = setInterval(nextSlide, 4000);
+                    }
+                    
+                    function resetAutoPlay() {
+                        clearInterval(autoPlayInterval);
+                        startAutoPlay();
+                    }
+                    
+                    // 鼠标悬停时暂停自动播放
+                    carousel.addEventListener('mouseenter', () => {
+                        clearInterval(autoPlayInterval);
+                    });
+                    
+                    // 鼠标离开时恢复自动播放
+                    carousel.addEventListener('mouseleave', () => {
+                        startAutoPlay();
+                    });
+                    
+                    // 开始自动播放
+                    startAutoPlay();
+                });
+            }
+        }
+        
+    );
+    // 视频模态框功能
+const modal = document.getElementById("videoModal");
+const videoPlayer = document.getElementById("projectVideo");
+const closeBtn = document.querySelector(".close");
+
+// 为每个查看演示按钮添加点击事件
+document.querySelectorAll('.btn-primary').forEach((btn, index) => {
+    btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        // 根据按钮索引设置不同的视频源
+        const videoSources = [
+            "./videos/farm-demo.mp4", // 第一个项目的演示视频
+            "./videos/adventure-demo.mp4", // 第二个项目的演示视频
+            "./videos/space-demo.mp4" // 第三个项目的演示视频
+        ];
+        
+        // 设置视频源并显示模态框
+        videoPlayer.src = videoSources[index];
+        modal.style.display = "block";
+        videoPlayer.play();
+    });
+});
+
+// 关闭模态框
+closeBtn.addEventListener('click', function() {
+    modal.style.display = "none";
+    videoPlayer.pause();
+});
+
+// 点击模态框背景关闭
+window.addEventListener('click', function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+        videoPlayer.pause();
+    }
+});
+
+// 按ESC键关闭模态框
+document.addEventListener('keydown', function(event) {
+    if (event.key === "Escape") {
+        modal.style.display = "none";
+        videoPlayer.pause();
+    }
+});
+    </script>
+</body>
+</html>
