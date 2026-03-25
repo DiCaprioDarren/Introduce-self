@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>算数游戏</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="start-screen" id="startScreen">
+        <div class="start-header">
+            <button class="icon-btn" id="exitStartBtn">
+                <span>✕</span>
+            </button>
+            <button class="icon-btn" id="soundBtn">
+                <span>🔊</span>
+            </button>
+        </div>
+        
+        <div class="start-content">
+            <h1 class="game-title">算数大师</h1>
+            <p class="game-subtitle">挑战你的计算速度</p>
+            <button class="start-game-btn" id="startGameBtn">开始游戏</button>
+        </div>
+        
+        <div class="start-footer">
+            <button class="footer-btn" id="rankBtn">
+                <span class="btn-icon">🏆</span>
+                <span>排行榜</span>
+            </button>
+            <button class="footer-btn" id="dailyBtn">
+                <span class="btn-icon">📅</span>
+                <span>每日挑战</span>
+            </button>
+        </div>
+    </div>
+    
+    <div class="game-container" id="gameContainer" style="display: none;">
+        <div class="header">
+            <div class="level">等级: <span id="level">1</span></div>
+            <button class="exit-btn" id="exitBtn">退出</button>
+        </div>
+        
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+        
+        <div class="stars-container" id="starsContainer">
+            <span class="star">☆</span>
+            <span class="star">☆</span>
+            <span class="star">☆</span>
+            <span class="star">☆</span>
+            <span class="star">☆</span>
+        </div>
+        
+        <div class="score-display">得分: <span id="score">0</span></div>
+        
+        <div class="question-container">
+            <div class="question" id="question">5 + 3 = ?</div>
+        </div>
+        
+        <div class="answers" id="answers">
+            <button class="answer-btn">6</button>
+            <button class="answer-btn">8</button>
+            <button class="answer-btn">10</button>
+            <button class="answer-btn">12</button>
+        </div>
+        
+        <div class="game-over" id="gameOver">
+            <h2>游戏结束！</h2>
+            <p>最终得分: <span id="finalScore">0</span></p>
+            <p>达到等级: <span id="finalLevel">1</span></p>
+            <button id="restartBtn">重新开始</button>
+        </div>
+    </div>
+    
+    <script src="game.js"></script>
+</body>
+</html>
